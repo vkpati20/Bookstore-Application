@@ -26,7 +26,7 @@ def view():
 def search(title="", author="", year="", isbn=""):
     con = sqlite3.connect("books.db")
     cur = con.cursor() 
-    cur.execute("SELECT * FROM book WHERE title=? OR author=? OR year=? OR isbn=?", (title, author, year, isbn))
+    cur.execute("SELECT * FROM book WHERE title LIKE ? OR author=? OR year=? OR isbn=?", (title+'%', author, year, isbn))
     rows=cur.fetchall()   
     con.close()    
     return rows
